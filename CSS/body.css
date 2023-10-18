@@ -1,0 +1,25 @@
+/*On enleve les bordure auto*/
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0; /* Supprimer les marges par défaut */
+  padding: 0; /* Supprimer les rembourrages par défaut */
+  font-family: Arial, sans-serif; /* Police de caractères par défaut */
+  font-size: 16px; /* Taille de police par défaut */
+  line-height: 1.5; /* Hauteur de ligne par défaut */
+  background-image: radial-gradient(circle farthest-side, var(--colorVar5), var(--colorVar4));
+}
+
+:root {
+  --colorVar1: #003049;
+  --colorVar2: #d62828;
+  --colorVar3: #f77f00;
+  --colorVar4: #fcbf49;
+  --colorVar5: #eae2b7;
+}

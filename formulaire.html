@@ -1,0 +1,969 @@
+<!-- Page 1 : formulaire.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CDN TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <!-- GOOGLEMAPS API -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH-p-HWALe7e2mCk_JZ3pMguSOoPWZaig&callback=initMap"
+      async
+      defer
+    ></script>
+    <script src="map.js" defer></script>
+    <!-- SCRIPT -->
+    <script src="js/calculateGaineInox.js"></script>
+    <script src="js/imgStorage.js"></script>
+    <script src="js/devisGeneration.js"></script>
+    <script src="js/calculateDPI-I.js"></script>
+    <script src="js/showSection.js"></script>
+    <script src="js/infoClientGeneration.js"></script>
+    <script src="js/calculateCoudeDPI-I.js"></script>
+    <script src="js/setGetJson.js"></script>
+    <script src="js/saveInfoJson.js"></script>
+    <script src="js/saveInfoHome.js"></script>
+    <script src="js/exportPDF.js"></script>
+    <script src="js/saveInfoJson_coude.js"></script>
+    <script src="js/affichageInfoDevis.js"></script>
+    <script src="js/affichageImgDevis.js"></script>
+
+    <!-- <script src="js/pollSessionCookie.js"></script> -->
+
+    <!-- CDN PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <!-- CDN EXCEL -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <title>HOAX Calculator</title>
+  </head>
+  <body>
+    <!-- Message SUCCESS -->
+    <div class="containerMessageSuccess">
+      <div
+        id="successMessage"
+        class="MessageSuccess hidden text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+      >
+        Enregistrement réussi !
+      </div>
+    </div>
+
+    <div class="containerMessageSuccess">
+      <div
+        id="faildMessage"
+        class="faildMessage hidden text-white 0 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+      >
+        Vous n'avez pas complété toutes les informations !
+      </div>
+    </div>
+
+    <!-- Menu de navigation -->
+    <ul class="menuTop">
+      <li class="backgroundInfoClient">
+        <a href="#" onclick="showSection('section1')">Client</a>
+      </li>
+      <li class="backgroundDimMaison">
+        <a href="#" onclick="showSection('section2')">Maison</a>
+      </li>
+      <li class="backgroundConduit">
+        <a href="#" onclick="showSection('section3')">Conduit</a>
+      </li>
+      <li class="backgroundDevis">
+        <a href="#" onclick="showSection('section4')">Devis</a>
+      </li>
+    </ul>
+
+    <!-- Contenu des sections -->
+    <div id="section1" style="display: none">
+      <!-- Contenu de la section 1 -->
+      <div class="containerAvatarInfoClient">
+        <div
+          class="relative w-20 h-20 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+        >
+          <img
+            class="w-100 h-100 rounded-full"
+            src="/IMG/ImgClient.jpeg"
+            alt="Rounded avatar"
+          />
+        </div>
+      </div>
+
+      <div class="containerInfoClient">
+        <form
+          class="mb-8 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        >
+          <!-- Name -->
+          <label
+            for="nom"
+            class="block mt-4 mb-2 text-lg text-xl font-normal text-gray-900 dark:text-white"
+            >Nom :</label
+          >
+          <input
+            type="text"
+            id="nom"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          />
+          <!-- SurName -->
+          <label
+            for="prenom"
+            class="block mt-4 mb-2 text-lg text-xl font-normal text-gray-900 dark:text-white"
+            >Prenom :</label
+          >
+          <input
+            type="text"
+            id="prenom"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          />
+          <!-- Adress -->
+          <label
+            for="adresse"
+            class="block mt-4 mb-2 text-lg text-xl font-normal text-gray-900 dark:text-white"
+            >Adresse :</label
+          >
+          <input
+            type="text"
+            id="adresse"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          />
+          <!-- City -->
+          <label
+            for="city"
+            class="block mt-4 mb-2 text-lg text-xl font-normal text-gray-900 dark:text-white"
+            >Ville :</label
+          >
+          <input
+            type="text"
+            id="city"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          />
+          <!-- ZIP-->
+          <label
+            for="codepostal"
+            class="block mt-4 mb-2 text-lg text-xl font-normal text-gray-900 dark:text-white"
+            >Code Postal :</label
+          >
+          <input
+            type="codepostal"
+            id="codepostal"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          />
+          <!-- Phone-->
+          <label
+            for="telephone"
+            class="block mt-4 mb-2 text-lg text-xl font-normal text-gray-900 dark:text-white"
+            >Téléphone :</label
+          >
+          <input
+            name="telephone"
+            type="tel"
+            id="telephone"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          />
+
+          <!-- Email Tailwind-->
+
+          <label
+            for="email"
+            class="block mt-4 mb-2 text-lg text-xl font-normal text-gray-900 dark:text-white"
+            >Email</label
+          >
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 16"
+              >
+                <path
+                  d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"
+                />
+                <path
+                  d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"
+                />
+              </svg>
+            </div>
+            <input
+              name="email"
+              type="email"
+              id="email"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="name@hoax.fr"
+            />
+          </div>
+
+          <!-- BTN validation Formulaire-->
+
+          <button
+            type="button"
+            onclick="saveInfoJson()"
+            class="mt-8 relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+          >
+            <span
+              class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"
+            ></span>
+            <span
+              class="relative text-xl font-semibold text-gray-900 text-white"
+              >Enregistrer Info Client</span
+            >
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="section2" style="display: none">
+      <!-- Contenu de la section 2 -->
+
+      <div class="containerInfoMaison">
+        <form class="formInfoMaison mt-6 p-6 bg-white p-4 rounded-lg shadow-md">
+          <h1
+            class="text-center text-xl font-semibold text-gray-900 dark:text-white"
+          >
+            Information sur l'habitation
+          </h1>
+
+          <!-- Volume de la pièce -->
+          <div class="mt-4">
+            <label
+              for="volumePiece"
+              class="block text-sm font-medium text-gray-900 dark:text-white"
+              >Volume de la pièce :</label
+            >
+            <input
+              type="longueur"
+              id="longueur"
+              min="0"
+              placeholder="longueur en cm"
+              class="w-50 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
+            />
+
+            <input
+              type="largeur"
+              id="largeur"
+              min="0"
+              placeholder="largeur en cm"
+              class="w-50 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
+            />
+
+            <input
+              type="hauteur"
+              id="hauteur"
+              min="0"
+              placeholder="hauteur en cm"
+              class="w-50 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
+            />
+
+            <div class="ml-4 mt-4 flex items-center">
+              <input
+                id="freshAir-checkbox"
+                type="checkbox"
+                value=""
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label
+                for="link-checkbox"
+                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >Arrivée d'air frais dans la pièce.</label
+              >
+            </div>
+          </div>
+
+          <!-- Hauteur du conduit -->
+          <div class="mt-4">
+            <label
+              for="hauteurDuConduit"
+              class="block text-sm font-medium text-gray-900 dark:text-white"
+              >Hauteur du conduit :</label
+            >
+            <input
+              type="number"
+              id="hauteurDuConduit"
+              min="0"
+              placeholder="en centimètres"
+              class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
+            />
+          </div>
+
+          <!-- Nature de conduit -->
+          <div class="mt-4">
+            <label
+              for="natureConduit"
+              class="block text-sm font-medium text-gray-900 dark:text-white"
+              >Nature du conduit</label
+            >
+            <select
+              id="natureConduit"
+              name="natureConduit"
+              class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value="Boisseau Brique">Boisseau Brique</option>
+              <option value="Atre en pierre">Atre en pierre</option>
+              <option value="Double paroie isolé">Double paroie isolé</option>
+            </select>
+          </div>
+
+          <div class="ml-4 mt-4 flex items-center">
+            <input
+              id="debistrage-checkbox"
+              type="checkbox"
+              value=""
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            />
+            <label
+              for="link-checkbox"
+              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >Réaliser un débistrage.</label
+            >
+          </div>
+
+          <!-- Altitude -->
+          <div class="mt-4">
+            <label
+              for="hauteurDuConduit"
+              class="block text-sm font-medium text-gray-900 dark:text-white"
+              >Altitude :</label
+            >
+            <input
+              type="number"
+              id="altitude"
+              min="0"
+              placeholder="en mètre"
+              class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
+            />
+          </div>
+
+          <!-- Type de tuiles -->
+          <div class="mt-4">
+            <label
+              for="typeDeTuiles"
+              class="block text-sm font-medium text-gray-900 dark:text-white"
+              >Type de tuiles</label
+            >
+            <select
+              id="typeDeTuiles"
+              name="typeDeTuiles"
+              class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option>Tuile plate</option>
+              <option>Tuile canal</option>
+              <option>Tuile romane</option>
+              <option>Tuiles grand moule et petit moule</option>
+              <option>Tuiles en béton</option>
+              <option>Tuiles en fibro-ciment</option>
+            </select>
+          </div>
+
+          <h1
+            class="text-center text-xl mt-6 font-semibold text-gray-900 dark:text-white"
+          >
+            Ajouter des images
+          </h1>
+
+          <div class="superContainerLoadImg">
+            <div
+              class="containerImgLoad mt-6 mb-6 bg-white p-4 rounded-lg shadow-md"
+            >
+              <input type="file" id="imageInput" accept="image/*" />
+              <!-- <img id="previewImage" src="" alt="Image Preview" /> -->
+              <div class="containerBtnLoadImg">
+                <button
+                  id="validateButton"
+                  class="btnLoadImg ml-6 relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+                >
+                  Ajouter
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="containerGalleryImg">
+            <div
+              id="imageGallery"
+              class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+            >
+              <!-- Les images seront affichées ici -->
+            </div>
+          </div>
+
+          <!-- Bouton Ajouter à la configuration -->
+
+          <button
+            type="button"
+            onclick="saveInfoHome()"
+            class="w-full mt-6 relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+          >
+            <span
+              class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"
+            ></span>
+            <span id="saveInfoHome" class="relative mt-6">Ajouter</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="section3" style="display: none">
+      <!-- Contenu de la section 3 -->
+
+      <!-- Input pour charger le fichier Excel -->
+      <div class="containerLoadFile">
+        <input
+          type="file"
+          id="excelFileInput"
+          accept=".xlsx"
+          class="mb-8 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        />
+      </div>
+
+      <div class="containerBoxGaineInox mt-6 grid grid-cols-3 gap-6">
+        <!-- Colonne 1 -->
+        <div class="containerGaineInox mt-6">
+          <div class="containerGaineInox mt-6">
+            <div
+              class="mb-8 block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            >
+              <div class="containerAvatarGaineInox">
+                <div
+                  class="w-20 h-20 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+                >
+                  <img
+                    class="w-100 h-100 rounded-full"
+                    src="/IMG/tubage-flexible.jpg"
+                    alt="Rounded avatar"
+                  />
+                </div>
+              </div>
+              <form class="p-6">
+                <h1 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  Gaine Inox
+                </h1>
+                <div class="mt-4">
+                  <label
+                    for="quantityGaine"
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >Longueur Gaine Inox :</label
+                  >
+                  <input
+                    type="number"
+                    id="quantityGaine"
+                    min="0"
+                    value="0"
+                    class="quantityGaine-I w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                  />
+                </div>
+
+                <!-- Cases à cocher pour choisir le diamètre -->
+                <div class="mt-4">
+                  <label
+                    for="diameterGaineInox"
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >Diamètre Gaine Inox :</label
+                  >
+                  <select
+                    id="diameterGaineInox"
+                    name="diameterGaineInox"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  >
+                    <option value="150">⌀ 150 cm</option>
+                    <option value="180">⌀ 180 cm</option>
+                    <option value="200">⌀ 200 cm</option>
+                  </select>
+                </div>
+                <!-- Zone pour afficher le prix calculé -->
+                <div id="priceResultGaineInox"></div>
+
+                <button
+                  type="button"
+                  onclick="calculatePriceGaineInox()"
+                  class="mt-6 w-full relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+                >
+                  <span
+                    class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"
+                  ></span>
+                  <span id="priceGaine" class="relative mt-6">Ajouter</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne 2 -->
+        <div class="containerGaineInox mt-6">
+          <div class="containerGaineInox mt-6">
+            <div
+              class="mb-8 block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            >
+              <div class="containerAvatarGaineInox">
+                <div
+                  class="w-20 h-20 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+                >
+                  <img
+                    class="w-100 h-100 rounded-full"
+                    src="/IMG/tubage-flexible.jpg"
+                    alt="Rounded avatar"
+                  />
+                </div>
+              </div>
+
+              <h1
+                class="mt-2 text-center text-xl font-semibold text-gray-900 dark:text-white"
+              >
+                Terminaison Gaine
+              </h1>
+
+              <form class="p-6 flex flex-wrap">
+                <div class="w-full md:w-1/3 px-4">
+                  <div class="mt-4">
+                    <label
+                      for="quantityCollierGaine"
+                      class="block text-sm font-medium text-gray-900 dark:text-white"
+                      >Collier :</label
+                    >
+                    <input
+                      type="number"
+                      id="quantityCollierGaine"
+                      min="0"
+                      value="0"
+                      class="quantityCollierGaine-I w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="w-full md:w-1/3 px-4">
+                  <!-- Terminaison Gaine -->
+                  <div class="mt-4">
+                    <label
+                      for="terminaisonGaineInox"
+                      class="block text-sm font-medium text-gray-900 dark:text-white"
+                      >Terminaison de gaine :</label
+                    >
+                    <select
+                      id="terminaisonGaineInox"
+                      name="terminaisonGaineInox"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                      <option value="150">⌀ 150 cm</option>
+                      <option value="180">⌀ 180 cm</option>
+                      <option value="200">⌀ 200 cm</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="w-full md:w-1/3 px-4">
+                  <!-- Cases à cocher pour choisir le diamètre -->
+                  <div class="mt-4">
+                    <label
+                      for="terminaisonGaineInox"
+                      class="block text-sm font-medium text-gray-900 dark:text-white"
+                      >Terminaison de gaine :</label
+                    >
+                    <select
+                      id="terminaisonGaineInox"
+                      name="terminaisonGaineInox"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                      <option value="150">⌀ 150 cm</option>
+                      <option value="180">⌀ 180 cm</option>
+                      <option value="200">⌀ 200 cm</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Zone pour afficher le prix calculé -->
+                <div id="priceResultGaineInox"></div>
+
+                <button
+                  type="button"
+                  onclick="calculatePriceGaineInox()"
+                  class="mt-6 w-full relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+                >
+                  <span
+                    class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"
+                  ></span>
+                  <span id="priceGaine" class="relative mt-6">Ajouter</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne 3 -->
+        <div class="containerGaineInox mt-6">
+          <div class="containerGaineInox mt-6">
+            <div
+              class="mb-8 block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            >
+              <div class="containerAvatarGaineInox">
+                <div
+                  class="w-20 h-20 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+                >
+                  <img
+                    class="w-100 h-100 rounded-full"
+                    src="/IMG/tubage-flexible.jpg"
+                    alt="Rounded avatar"
+                  />
+                </div>
+              </div>
+              <form class="p-6">
+                <h1 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  Gaine Inox
+                </h1>
+                <div class="mt-4">
+                  <label
+                    for="quantityGaine"
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >Longueur Gaine Inox :</label
+                  >
+                  <input
+                    type="number"
+                    id="quantityGaine"
+                    min="0"
+                    value="0"
+                    class="quantityGaine-I w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                  />
+                </div>
+
+                <!-- Cases à cocher pour choisir le diamètre -->
+                <div class="mt-4">
+                  <label
+                    for="diameterGaineInox"
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >Diamètre Gaine Inox :</label
+                  >
+                  <select
+                    id="diameterGaineInox"
+                    name="diameterGaineInox"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  >
+                    <option value="150">⌀ 150 cm</option>
+                    <option value="180">⌀ 180 cm</option>
+                    <option value="200">⌀ 200 cm</option>
+                  </select>
+                </div>
+                <!-- Zone pour afficher le prix calculé -->
+                <div id="priceResultGaineInox"></div>
+
+                <button
+                  type="button"
+                  onclick="calculatePriceGaineInox()"
+                  class="mt-6 w-full relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+                >
+                  <span
+                    class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"
+                  ></span>
+                  <span id="priceGaine" class="relative mt-6">Ajouter</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sectionConduitFumee">
+        <!-- Conteneur DPI-i -->
+        <div class="containerDPI_i">
+          <div class="containerAvatarInfoClient">
+            <div
+              class="relative w-20 h-20 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+            >
+              <img
+                class="w-100 h-100 rounded-full"
+                src="/IMG/Conduit-douple-paroi-isol-inox.jpg"
+                alt="Rounded avatar"
+              />
+            </div>
+          </div>
+          <div
+            class="mb-8 block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          >
+            <form class="p-6">
+              <h1
+                class="mt-8 text-xl font-semibold text-gray-900 dark:text-white"
+              >
+                Longueurs Double Paroies Isolées
+              </h1>
+
+              <!-- Quantité Longueur DPI-I -->
+              <div class="mt-4">
+                <label
+                  for="quantityDPI-I"
+                  class="block text-sm font-medium text-gray-900 dark:text-white"
+                  >Quantité Longueur DPI-I :</label
+                >
+                <input
+                  type="number"
+                  id="quantityDPI-I"
+                  min="0"
+                  value="0"
+                  class="quantityDPI-I w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
+                />
+              </div>
+
+              <!-- Diamètre DPI-I -->
+              <div class="mt-4">
+                <label
+                  for="diameter"
+                  class="block text-sm font-medium text-gray-900 dark:text-white"
+                  >Diamètre DPI-I :</label
+                >
+                <select
+                  id="diameter"
+                  name="diameter"
+                  class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option value="150">⌀ 150 cm</option>
+                  <option value="180">⌀ 180 cm</option>
+                  <option value="200">⌀ 200 cm</option>
+                </select>
+              </div>
+
+              <!-- Taille DPI-I -->
+              <div class="mt-4">
+                <label
+                  for="size"
+                  class="block text-sm font-medium text-gray-900 dark:text-white"
+                  >Taille DPI-I :</label
+                >
+                <select
+                  id="size"
+                  name="size"
+                  class="w-full mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option value="25">25 cm</option>
+                  <option value="50">50 cm</option>
+                  <option value="100">100 cm</option>
+                </select>
+              </div>
+
+              <!-- Bouton Ajouter à la configuration -->
+
+              <button
+                type="button"
+                onclick="savePriceToLocalStorage()"
+                class="w-full relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+              >
+                <span
+                  class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"
+                ></span>
+                <span id="priceResultDPI-I" class="relative mt-6">Ajouter</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Conteneur Coudes DPI-i -->
+        <div class="containerCoudeDPI_i">
+          <div class="containerAvatarInfoClient">
+            <div
+              class="relative w-20 h-20 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+            >
+              <img
+                class="w-100 h-100 rounded-full"
+                src="/IMG/Coude-douple-paroi-isol-inox.jpg"
+                alt="Rounded avatar"
+              />
+            </div>
+          </div>
+          <div
+            class="mb-8 block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          >
+            <form class="p-6">
+              <h1
+                class="mt-8 text-xl font-semibold text-gray-900 dark:text-white"
+              >
+                Coudes Double Paroies Isolées
+              </h1>
+
+              <!-- Quantité Coude DPI-I -->
+              <div class="mt-4">
+                <label
+                  for="quantityCoudeDPI-I"
+                  class="block text-sm font-medium text-gray-900 dark:text-white"
+                  >Quantité Coude DPI-I :</label
+                >
+                <input
+                  type="number"
+                  id="quantityCoudeDPI-I"
+                  min="0"
+                  value="0"
+                  class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 quantityCoudeDPI-input"
+                  required
+                />
+              </div>
+
+              <!-- Diamètre coude DPI-I -->
+              <div class="mt-4">
+                <label
+                  for="diamCoudeDpiI"
+                  class="block text-sm font-medium text-gray-900 dark:text-white"
+                  >Diamètre coude DPI-I :</label
+                >
+                <select
+                  id="diamCoudeDpiI"
+                  name="diamCoudeDpiI"
+                  class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option value="80">⌀ 80 mm</option>
+                  <option value="100">⌀ 100 mm</option>
+                  <option value="130">⌀ 130 mm</option>
+                  <option value="150">⌀ 150 mm</option>
+                  <option value="180">⌀ 180 mm</option>
+                  <option value="200">⌀ 200 mm</option>
+                </select>
+              </div>
+
+              <!-- Degré d'inclinaison -->
+              <div class="mt-4">
+                <label
+                  for="coudeInclinaisonDpiI"
+                  class="block text-sm font-medium text-gray-900 dark:text-white"
+                  >Degré d'inclinaison :</label
+                >
+                <select
+                  id="coudeInclinaisonDpiI"
+                  name="coudeInclinaisonDpiI"
+                  class="w-full mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option value="15">15°</option>
+                  <option value="30">30°</option>
+                  <option value="45">45°</option>
+                  <option value="90">90°</option>
+                </select>
+              </div>
+
+              <!-- Bouton Ajouter et voir le prix à la configuration pour les Coudes DPI-I -->
+
+              <button
+                type="button"
+                onclick="savePriceCoudeToLocalStorage()"
+                class="w-full relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+              >
+                <span
+                  class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"
+                ></span>
+                <span id="priceResultCoudeDPI-I" class="relative mt-6"
+                  >Ajouter</span
+                >
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="section4" style="display: none">
+      <!-- Contenu de la section 4 -->
+
+      <h1 class="titreInfoClientImg">Adresse et informations client</h1>
+
+      <div class="superContainerDevisInfoClientImg">
+        <div
+          class="containerInfoClientResultat grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          <div class="blocInfoClient">
+            <div
+              class="mb-6 p-8 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            >
+              <dl
+                class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700"
+                id="dataList"
+              >
+                <!-- Les données récupérées seront affichées ici -->
+              </dl>
+            </div>
+          </div>
+          <!-- MAP GOOGLE -->
+          <div class="blocMapInfoClient">
+            <div id="map" style="width: 80vw; height: 50vh"></div>
+            <div id="trajet-detail" class="mt-4">
+              <!-- Les détails du trajet seront affichés ici -->
+            </div>
+          </div>
+        </div>
+
+        <h1 class="titreInfoClientImg">Informations habitation</h1>
+
+        <div class="containerInfoHabitation">
+          <div class="container mx-auto p-4">
+            <div class="space-y-4">
+              <div
+                class="containerUlLiInfoHabitation p-6 bg-white rounded-lg shadow-md divide-y divide-gray-300"
+              >
+                <h2 class="text-2xl font-semibold mb-4">
+                  Détails de l'habitation
+                </h2>
+                <ul id="habitationDetails">
+                  <!-- Les détails de l'habitation seront ajoutés ici -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="containerGalleryImgDevis">
+            <div
+              id="imageGalleryDevis"
+              class="p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            >
+              <!-- Les images seront affichées ici -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="titreInfoClientImg">Devis détaillés</h1>
+
+      <div class="mt-6 containerDevisResultat">
+        <div class="blocDevis">
+          <div id="devisContainer" class="bg-white p-4 rounded-lg shadow-md">
+            <h1 class="text-2xl font-semibold mb-4">Devis</h1>
+            <ul class="divide-y divide-gray-200">
+              <!-- Les produits seront ajoutés ici -->
+            </ul>
+            <div class="mt-4">
+              <p class="text-lg font-semibold">
+                Sous-total: <span id="sousTotal">0 €</span>
+              </p>
+              <p class="text-lg font-semibold">
+                Taxes: <span id="taxes">0 €</span>
+              </p>
+              <p class="text-lg font-semibold">
+                Total: <span id="total">0 €</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="containerBtnDevis">
+        <button
+          id="exportPdf"
+          class="mt-6 relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+        >
+          <span
+            class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"
+          ></span>
+          <span id="saveInfoHome" class="relative mt-6">Export PDF</span>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

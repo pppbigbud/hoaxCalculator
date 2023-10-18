@@ -1,0 +1,23 @@
+.sectionConduitFumee {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 5vh;
+}
+
+.containerGaineInox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerAvatarGaineInox{
+    display: flex;
+    justify-content: center;
+    margin-top: -2vh;
+}
+
+.containerBoxGaineInox{
+    background-color: aqua;
+}

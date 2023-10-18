@@ -1,0 +1,39 @@
+.containerInfoClient {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.containerInfoClient form{
+    width: 30%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.containerAvatarInfoClient{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5vh;
+    margin-bottom: -5vh;
+}
+
+.containerMessageSuccess {
+    position: relative;
+}
+
+.MessageSuccess{
+    position: fixed;
+    top: 2vh;
+    right: 5vh;
+    z-index: 500;
+}
+
+.faildMessage{
+    position: fixed;
+    top: 2vh;
+    right: 5vh;
+    z-index: 500;
+}

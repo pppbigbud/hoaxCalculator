@@ -1,0 +1,140 @@
+.menuTop {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 10vh;
+    max-height: 15vh;
+    background-color: var(--colorVar4);
+    list-style-type: none;
+}
+
+.menuTop li {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    width: 25%;
+    min-height: 15vh;
+    max-height: 20vh;
+    position: relative;
+}
+
+.menuTop li a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    transition: font-size 0.3s;
+    position: relative;
+    z-index: 5;
+    margin-right: 1vw;
+    opacity: 0.6;
+}
+
+
+.menuTop li:hover a{
+    font-size: 4rem;
+    opacity: 1;
+}
+
+.backgroundInfoClient {
+    background-image: url('../IMG/infoClient.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+}
+
+.menuTop .backgroundInfoClient::before { 
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    transition: 0.3s;
+    background-color: var(--colorVar1);
+    z-index: 1; 
+}
+
+.menuTop .backgroundInfoClient:hover::before {
+    opacity: 0.8;
+    box-shadow: inset 0 0 10px #000000;
+  }
+
+
+.backgroundDimMaison{
+    background-image: url('../IMG/dimMaison.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+}
+
+.menuTop .backgroundDimMaison::before { 
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background-color:var(--colorVar2); 
+    z-index: 1; 
+}
+
+.menuTop .backgroundDimMaison:hover::before {
+    opacity: 0.8;
+    box-shadow: inset 0 0 10px #000000;
+  }
+
+
+.backgroundConduit{
+    background-image: url('../IMG/conduitDeFumee.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+}
+
+.menuTop .backgroundConduit::before { 
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background-color: var(--colorVar3); 
+    z-index: 1; 
+}
+
+.menuTop .backgroundConduit:hover::before {
+    opacity: 0.8;
+    box-shadow: inset 0 0 10px #000000;
+  }
+
+.backgroundDevis{
+    background-image: url('../IMG/devis.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center; 
+}
+
+.menuTop .backgroundDevis::before { 
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background-color: var(--colorVar4); 
+    z-index: 1;
+}
+
+.menuTop .backgroundDevis:hover::before {
+    opacity: 0.8;
+    box-shadow: inset 0 0 10px #000000;
+  }

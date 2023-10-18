@@ -1,0 +1,45 @@
+.containerImgLoad {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.superContainerLoadImg{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnLoadImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerBtnLoadImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerGalleryImg{
+    width: 100%;
+    /* display: flex; */
+    /* align-items: center;
+    justify-content: center; */
+}
+
+.formInfoMaison{
+    width: 35%;
+    height: auto;
+}
+
+.containerInfoMaison{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
